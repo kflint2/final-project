@@ -33,5 +33,7 @@ delivering just the initial index.html file.
   *  If you want debug logging run from terminal `DEBUG=dev node main.js` or `DEBUG=dev nodemon main.js` if you use nodemon
   *  Omit `DEBUG=dev` if you don't want logging: `node main.js`
 6.  Open `http://localhost:5050` in a browser to use the application - you should see the login screen
+  *  Feel free to change the PORT to whatever you want (keep in mind there is no environment variables and that Angular currently uses `http://localhost:5050/` as its base URL`
 
-
+#####Diagram
+![](ang-express-readme-diagram.png)
