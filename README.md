@@ -3,7 +3,8 @@
 This project is a great starting point for developers
 who want to use Angular and Express in the same repository
 as well as have Angular handle ALL of the front end work, with Express
-delivering just the initial index.html file.
+delivering just the initial index.html file. This seed also handles Local Authentication Strategy.
+Meaning basic user account creation and user login is set up for you out of the box.
 
 #####How It Works
 
