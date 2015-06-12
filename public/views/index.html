@@ -1,0 +1,33 @@
+<html>
+
+<head>
+	<title>App Title</title>
+	<link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+	<link href="../css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body ng-app="main">
+	<a href="/#/login">Login</a>
+	<a href="/#/signup">Signup</a>
+
+	<ng-view></ng-view>
+
+	<!-- VENDOR -->
+	<script src="/bower_components/angular/angular.min.js"></script>
+	<script src="/bower_components/angular-route/angular-route.js"></script>
+	<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<!--
+	Since the public directory is set as static on the node server make sure you NEVER include it in your path
+	in your linked files
+-->
+	<script src="views/main.js"></script>
+	<script src="views/login/login.js"></script>
+	<script src="views/signup/signup.js"></script>
+	<script src="services/authservice.js"></script>
+
+</body>
+
+</html>
