@@ -31,6 +31,7 @@ Meaning basic user account creation and user login is set up for you out of the 
 3.  From terminal run `bower install`
 4.  From terminal run `sudo npm install`
 5.  Starting the app:
+  *  If mongod isn't already running, open a new terminal tab or window and enter `mongod` (then go back to your previous terminal window)
   *  If you want debug logging run from terminal `DEBUG=dev node main.js` or `DEBUG=dev nodemon main.js` if you use nodemon
   *  Omit `DEBUG=dev` if you don't want logging: `node main.js`
 6.  Open `http://localhost:5050` in a browser to use the application - you should see the login screen
