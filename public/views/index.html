@@ -2,17 +2,17 @@
 
 <head>
 	<title>App Title</title>
-	<link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
-	<link href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+	<!--<link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">-->
+    <link href="../vendor/bootswatch/bootswatch.min.css" rel="stylesheet" type="text/css">
 	<link href="../css/main.css" rel="stylesheet" type="text/css">
 </head>
 
-<body ng-app="main">
-	<a href="/#/login">Login</a>
-	<a href="/#/signup">Signup</a>
-
+<body ng-app="entreApp" ng-controller="postCtrl">
 	<ng-view></ng-view>
 
+	<!--<a href="/#/login">Login</a>
+	<a href="/#/signup">Signup</a>-->
 	<!-- VENDOR -->
 	<script src="/bower_components/angular/angular.min.js"></script>
 	<script src="/bower_components/angular-route/angular-route.js"></script>
@@ -24,6 +24,8 @@
 	in your linked files
 -->
 	<script src="views/main.js"></script>
+	<script src="views/posts/posts.js"></script>
+    <script src="views/collection/collection.js"></script>
 	<script src="views/login/login.js"></script>
 	<script src="views/signup/signup.js"></script>
 	<script src="services/authservice.js"></script>

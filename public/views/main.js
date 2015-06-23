@@ -1,9 +1,9 @@
-var app = angular.module('main', ['ngRoute', 'main.login', 'main.signup']);
+var app = angular.module('entreApp', ['ngRoute', 'entreApp.login', 'entreApp.signup', 'entreApp.posts']);
 
 app.config(function ($routeProvider) {
 	$routeProvider
 		.when('/', {
-			redirectTo: '/login'
+			redirectTo: '/posts'
 		})
 		.otherwise({
 			redirectTo: '/login'

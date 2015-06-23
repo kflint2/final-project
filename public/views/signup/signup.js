@@ -1,4 +1,4 @@
-var app = angular.module('main.signup', ['ngRoute']);
+var app = angular.module('entreApp.signup', ['ngRoute']);
 
 app.config(function ($routeProvider) {
 	$routeProvider
