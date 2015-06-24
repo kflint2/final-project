@@ -10,19 +10,21 @@ app.config(function ($routeProvider) {
 });
 
 app.factory("Post", function () {
-    return function () {
-        return function () {
-            this.url = String;
-            this.title = String;
-            this.description = String;
-            this.votes = Number;
-            this.date = Date;
+    
+        var post = function () {
+            this.url = "";
+            this.title = "";
+            this.description = "";
+            this.votes = 5;
+            this.date = Date.now();
             this.comments = [{
-                text: String,
-                date: Date
+                text: "",
+                date: Date.now()
        }];
         };
-    };
+    
+    return post;
+    
 });
 
 app.service('dataService', function () {
@@ -55,6 +57,7 @@ app.controller('postCtrl', function ($scope, Post, dataService) {
 
     $scope.createPost = function () {
         //write validation code
+        
         dataService.createPost($scope.post);
         $scope.post = {};
         $scope.posts = dataService.getPosts();
@@ -64,3 +67,5 @@ app.controller('postCtrl', function ($scope, Post, dataService) {
         dataService.addComment($scope.commentStr, post);
     };
 });
+
+// ng-show="posts.count > 0"

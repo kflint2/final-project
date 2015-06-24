@@ -36,39 +36,47 @@
 
 
 
-<div class="container" ng-app="entreApp.posts" ng-controller="postCtrl">
+<div class="container">
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="col-lg-10">
-                <label class="control-label" for="inputDefault" ng-model="post.url">URL</label>
-                <input type="text" class="form-control" id="inputDefault">
+                <label class="control-label" for="inputDefault">URL</label>
+                <input type="text" class="form-control" id="inputDefault" ng-model="post.url">
             </div>
             <br>
             <br>
             <div class="col-lg-10">
-                <label class="control-label" for="inputDefault" ng-model="post.title">Title</label>
-                <input type="text" class="form-control" id="inputDefault">
+                <label class="control-label" for="inputDefault">Title</label>
+                <input type="text" class="form-control" id="inputDefault" ng-model="post.title">
             </div>
             <br>
             <br>
-            <label for="textArea" class="col-lg-2 control-label" ng-model="post.description">Description</label>
+            <label for="textArea" class="col-lg-2 control-label">Description</label>
 
             <div class="col-lg-10">
-                <textarea class="form-control" rows="3" id="textArea"></textarea>
+                <textarea class="form-control" rows="3" id="textArea" ng-model="post.description"></textarea>
                 <span class="help-block">Write a brief description about this post.</span>
             </div>
-             <p class="postButton">
-            <a class="btn btn-primary" ng-click="createPost()">Post</a>
-        </p>
+            <p class="postButton">
+                <a class="btn btn-primary" ng-click="createPost()">Post</a>
+            </p>
         </div>
-       
+
 
     </div>
-    
-    <div ng-repeat="newPost in post">
-        <p>{{newPost.url}}</p>
-        <p>{{newPost.title}}</p>
-        <p>{{newPost.description}}</p>
-    
+
+    <div class="panel panel-primary" ng-repeat="newPost in posts">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{newPost.title}}</h3>
+        </div>
+        <div class="panel-body">
+            <div>Description:{{newPost.description}}</div>
+            <div class="btn btn-primary">{{newPost.url}}</div>
+            <div>{{newPost.date}}</div>
+            <div>{{newPost.votes}}</div>
+            <div>{{newPost.comments}}</div>
+        </div>
     </div>
+
+
 </div>
