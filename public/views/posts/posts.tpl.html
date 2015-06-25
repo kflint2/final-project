@@ -4,50 +4,77 @@
 
 
 <div class="container">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="col-lg-10">
-                <label class="control-label" for="inputDefault">URL</label>
-                <input type="text" class="form-control" id="inputDefault" ng-model="post.url">
-            </div>
-            <br>
-            <br>
-            <div class="col-lg-10">
-                <label class="control-label" for="inputDefault">Title</label>
-                <input type="text" class="form-control" id="inputDefault" ng-model="post.title">
-            </div>
-            <br>
-            <br>
-            <label for="textArea" class="col-lg-2 control-label">Description</label>
 
-            <div class="col-lg-10">
-                <textarea class="form-control" rows="3" id="textArea" ng-model="post.description"></textarea>
-                <span class="help-block">Write a brief description about this post.</span>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h5>Add a Topic</h5>
+                    </div>
+                    <form name="inputFields">
+                        <div class="panel-body">
+                            <p>Please add either a YouTube, Image, or Article URL below.</p>
+                            <div class="col-lg-12">
+                                <label class="control-label" for="inputDefault"><h6>Article URL</h6></label>
+                                <input type="text" name="urlInput" placeholder="Enter Article URL" class="form-control" id="inputDefault" ng-model="post.url" ng-disabled="inputFields.imageUrlInput.$dirty || inputFields.videoUrlInput.$dirty">
+                            </div>
+                            <br>
+                            <div class="col-lg-12">
+                                <label class="control-label" for="inputDefault"><h6>Image URL</h6></label>
+                                <input type="text" name="imageUrlInput" placeholder="Enter an Image URL" class="form-control" id="inputDefault" ng-model="post.imageUrl" ng-disabled="inputFields.urlInput.$dirty || inputFields.videoUrlInput.$dirty">
+                            </div>
+                            <br>
+                            <div class="col-lg-12">
+                                <label class="control-label" for="inputDefault"><h6>Video URL</h6></label>
+                                <input type="url" name="videoUrlInput" placeholder="Enter Video URL" class="form-control" id="inputDefault" ng-model="post.videoUrl" ng-disabled="inputFields.urlInput.$dirty || inputFields.imageUrlInput.$dirty">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-lg-12">
+                                <label class="control-label" for="inputDefault"><h6>Title</h6></label>
+                                <input type="text" class="form-control" id="inputDefault" ng-model="post.title">
+                            </div>
+                            <br>
+                            <br>
+                            <label for="textArea" class="col-lg-12 control-label"><h6>Description</h6></label>
+
+                            <div class="col-lg-12">
+                                <textarea class="form-control" rows="3" id="textArea" ng-model="post.description"></textarea>
+                                <span class="help-block">Write a brief description about this post.</span>
+                            </div>
+                            <p class="postButton">
+                                <a class="btn btn-primary" ng-click="createPost()">Post</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+
+
             </div>
-            <p class="postButton">
-                <a class="btn btn-primary" ng-click="createPost()">Post</a>
-            </p>
         </div>
-
-
     </div>
     
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary" ng-repeat="newPost in posts">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{newPost.title}}</h3>
+                </div>
+                <div class="row panel-body">
+                    <div class="col-md-6">
+                        <!--<img ng-src="{{newPost.imageUrl}}">-->
+                        <iframe ng-src="{{getAuthorizedUrl(newPost.videoUrl)}}"></iframe>
 
-    <div class="panel panel-primary row" ng-repeat="newPost in posts">
-        <div class="panel-heading">
-            <h3 class="panel-title">{{newPost.title}}</h3>
-        </div>
-        <div class="panel-body">
-            <div class="col-md-6"> {{newPost.url}}
+
+                    </div>
+                    <div class="col-md-3" style="text-align:left">
+                        <div>Description: This is a test description bla bla bla test test {{newPost.description}}</div>
+                    </div>
+                </div>
+
             </div>
-            <div class="col-md-6">
-                <div>Description: {{newPost.description}}</div>
-                <div class="btn btn-primary">{{newPost.url}}</div>
-
-            </div>
-
         </div>
     </div>
-
-
 </div>
