@@ -20,7 +20,7 @@ app.factory("Post", function () {
         this.votes = null;
         this.date = null;
         this.comments = [{
-            text: null,
+            text: "This comment is pulling from your factory",
             date: null
        }];
     };
@@ -67,7 +67,11 @@ app.controller('postCtrl', function ($scope, Post, dataService, $sce) {
         dataService.createPost($scope.post);
 
         $scope.post = {};
-        $scope.inputFields.$setPristine(true);
+        
+        //$scope.inputFields.$setPristine(true);
+        $scope.hideVideoUrl = false;
+        $scope.hideImageUrl = false;
+        $scope.hideUrl = false;
 
         $scope.posts = dataService.getPosts();
 
@@ -91,13 +95,13 @@ app.controller('postCtrl', function ($scope, Post, dataService, $sce) {
     $scope.inputChanged = function (urlType) {
 
         if (urlType === 'video') {
-            console.log("hey");
+       
             //if user entered text in video field
             if ($scope.post.videoUrl && $scope.post.videoUrl.length > 0) {
             
                 $scope.hideUrl = true;
                 $scope.hideImageUrl = true;
-                    console.log("After");
+                  
                 
             } else {
                 $scope.hideVideoUrl = false;

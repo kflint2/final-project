@@ -70,27 +70,27 @@
         <div class="col-md-12">
             <div class="panel panel-primary" ng-repeat="newPost in posts">
                 <div class="panel-heading">
-                   
+
                     <h3 class="panel-title">{{newPost.title}}</h3>
                 </div>
-                    
+
                 <div class="row panel-body">
                     <div class="col-md-6">
 
                         <!--This is where a user posts an article URL-->
-                        <div class="videoWrapper" ng-show ="newPost.url">
+                        <div class="videoWrapper" ng-show="newPost.url">
 
-                            <iframe  ng-src="{{getAuthorizedUrl(newPost.url)}}"></iframe>
+                            <iframe ng-src="{{getAuthorizedUrl(newPost.url)}}"></iframe>
                         </div>
-                        <div class="imageWrapper" ng-show ="newPost.imageUrl" >
+                        <div class="imageWrapper" ng-show="newPost.imageUrl">
 
-                        <!--This is where an image will post-->
-                        <img ng-src="{{newPost.imageUrl}}">
+                            <!--This is where an image will post-->
+                            <img ng-src="{{newPost.imageUrl}}">
                         </div>
 
                         <!--This is where a video will post-->
 
-                        <div class="videoWrapper" ng-show ="newPost.videoUrl" >
+                        <div class="videoWrapper" ng-show="newPost.videoUrl">
 
                             <iframe ng-src="{{getAuthorizedUrl(newPost.videoUrl)}}" allowfullscreen></iframe>
                         </div>
@@ -101,8 +101,18 @@
                         <div>
                             <h6>Description: </h6>{{newPost.description}}</div>
                     </div>
+
                 </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Comments</div>
+                    <div class="panel-body">
+                        {{newPost.comments[0].text}}
+                    </div>
+                </div>
+
 
             </div>
         </div>
+
     </div>
