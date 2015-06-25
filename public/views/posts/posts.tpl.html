@@ -15,29 +15,39 @@
                     <form name="inputFields">
                         <div class="panel-body">
                             <p>Please add either a YouTube, Image, or Article URL below.</p>
-                            <div class="col-lg-12">
-                                <label class="control-label" for="inputDefault"><h6>Article URL</h6></label>
-                                <input type="text" name="urlInput" placeholder="Enter Article URL" class="form-control" id="inputDefault" ng-model="post.url" ng-disabled="inputFields.imageUrlInput.$dirty || inputFields.videoUrlInput.$dirty">
+                            <div class="col-lg-12" ng-hide="hideUrl">
+                                <label class="control-label" for="inputDefault">
+                                    <h6>Article URL</h6>
+                                </label>
+                                <input type="text" name="urlInput" placeholder="Enter Article URL" class="form-control" id="inputDefault" ng-model="post.url" ng-change="inputChanged('url')">
                             </div>
                             <br>
-                            <div class="col-lg-12">
-                                <label class="control-label" for="inputDefault"><h6>Image URL</h6></label>
-                                <input type="text" name="imageUrlInput" placeholder="Enter an Image URL" class="form-control" id="inputDefault" ng-model="post.imageUrl" ng-disabled="inputFields.urlInput.$dirty || inputFields.videoUrlInput.$dirty">
+                            <div class="col-lg-12" ng-hide="hideImageUrl">
+                                <label class="control-label" for="inputDefault">
+                                    <h6>Image URL</h6>
+                                </label>
+                                <input type="text" name="imageUrlInput" placeholder="Enter an Image URL" class="form-control" id="inputDefault" ng-model="post.imageUrl" ng-change="inputChanged('image')">
                             </div>
                             <br>
-                            <div class="col-lg-12">
-                                <label class="control-label" for="inputDefault"><h6>Video URL</h6></label>
-                                <input type="url" name="videoUrlInput" placeholder="Enter Video URL" class="form-control" id="inputDefault" ng-model="post.videoUrl" ng-disabled="inputFields.urlInput.$dirty || inputFields.imageUrlInput.$dirty">
+                            <div class="col-lg-12" ng-hide="hideVideoUrl">
+                                <label class="control-label" for="inputDefault">
+                                    <h6>Video URL</h6>
+                                </label>
+                                <input type="url" name="videoUrlInput" placeholder="Enter Video URL" class="form-control" id="inputDefault" ng-model="post.videoUrl" ng-change="inputChanged('video')">
                             </div>
                             <br>
                             <br>
                             <div class="col-lg-12">
-                                <label class="control-label" for="inputDefault"><h6>Title</h6></label>
+                                <label class="control-label" for="inputDefault">
+                                    <h6>Title</h6>
+                                </label>
                                 <input type="text" class="form-control" id="inputDefault" ng-model="post.title">
                             </div>
                             <br>
                             <br>
-                            <label for="textArea" class="col-lg-12 control-label"><h6>Description</h6></label>
+                            <label for="textArea" class="col-lg-12 control-label">
+                                <h6>Description</h6>
+                            </label>
 
                             <div class="col-lg-12">
                                 <textarea class="form-control" rows="3" id="textArea" ng-model="post.description"></textarea>
@@ -55,26 +65,44 @@
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-primary" ng-repeat="newPost in posts">
                 <div class="panel-heading">
+                   
                     <h3 class="panel-title">{{newPost.title}}</h3>
                 </div>
+                    
                 <div class="row panel-body">
                     <div class="col-md-6">
-                        <!--<img ng-src="{{newPost.imageUrl}}">-->
-                        <iframe ng-src="{{getAuthorizedUrl(newPost.videoUrl)}}"></iframe>
+
+                        <!--This is where a user posts an article URL-->
+                        <div class="videoWrapper" ng-show ="newPost.url">
+
+                            <iframe  ng-src="{{getAuthorizedUrl(newPost.url)}}"></iframe>
+                        </div>
+                        <div class="imageWrapper" ng-show ="newPost.imageUrl" >
+
+                        <!--This is where an image will post-->
+                        <img ng-src="{{newPost.imageUrl}}">
+                        </div>
+
+                        <!--This is where a video will post-->
+
+                        <div class="videoWrapper" ng-show ="newPost.videoUrl" >
+
+                            <iframe ng-src="{{getAuthorizedUrl(newPost.videoUrl)}}" allowfullscreen></iframe>
+                        </div>
 
 
                     </div>
                     <div class="col-md-3" style="text-align:left">
-                        <div>Description: This is a test description bla bla bla test test {{newPost.description}}</div>
+                        <div>
+                            <h6>Description: </h6>{{newPost.description}}</div>
                     </div>
                 </div>
 
             </div>
         </div>
     </div>
-</div>

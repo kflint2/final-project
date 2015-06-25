@@ -1,50 +1,84 @@
 body {
-	padding-top: 40px;
-	padding-bottom: 40px;
-	background-color: #eee;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eee;
 }
 
 .form-signin {
-	max-width: 330px;
-	padding: 15px;
-	margin: 0 auto;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
 }
 
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .form-signin .checkbox {
-	font-weight: normal;
+    font-weight: normal;
 }
 
 .form-signin .form-control {
-	position: relative;
-	height: auto;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	padding: 10px;
-	font-size: 16px;
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
 }
 
 .form-signin .form-control:focus {
-	z-index: 2;
+    z-index: 2;
 }
 
 .form-signin input[type="email"] {
-	margin-bottom: -1px;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0;
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 .form-signin input[type="password"] {
-	margin-bottom: 10px;
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
-.postButton{
+.postButton {
     float: right;
+}
+
+.imageWrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 */
+    
+    padding-top: 25px;
+    height: 0;
+}
+
+.imageWrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.videoWrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 */
+    
+    padding-top: 25px;
+    height: 0;
+}
+
+.videoWrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
