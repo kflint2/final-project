@@ -1,8 +1,6 @@
 <ng-include src="'views/navbar.tpl.html'"></ng-include>
 
 
-
-
 <div class="container">
 
     <div class="row">
@@ -19,21 +17,21 @@
                                 <label class="control-label" for="inputDefault">
                                     <h6>Article URL</h6>
                                 </label>
-                                <input type="text" name="urlInput" placeholder="Enter Article URL" class="form-control" id="inputDefault" ng-model="post.url" ng-change="inputChanged('url')">
+                                <input type="text" name="urlInput" placeholder="Enter Article URL" class="form-control" id="inputDefault" ng-model="newPost.url" ng-change="inputChanged('url')">
                             </div>
                             <br>
                             <div class="col-lg-12" ng-hide="hideImageUrl">
                                 <label class="control-label" for="inputDefault">
                                     <h6>Image URL</h6>
                                 </label>
-                                <input type="text" name="imageUrlInput" placeholder="Enter an Image URL" class="form-control" id="inputDefault" ng-model="post.imageUrl" ng-change="inputChanged('image')">
+                                <input type="text" name="imageUrlInput" placeholder="Enter an Image URL" class="form-control" id="inputDefault" ng-model="newPost.imageUrl" ng-change="inputChanged('image')">
                             </div>
                             <br>
                             <div class="col-lg-12" ng-hide="hideVideoUrl">
                                 <label class="control-label" for="inputDefault">
                                     <h6>Video URL</h6>
                                 </label>
-                                <input type="url" name="videoUrlInput" placeholder="Enter Video URL" class="form-control" id="inputDefault" ng-model="post.videoUrl" ng-change="inputChanged('video')">
+                                <input type="url" name="videoUrlInput" placeholder="Enter Video URL" class="form-control" id="inputDefault" ng-model="newPost.videoUrl" ng-change="inputChanged('video')">
                             </div>
                             <br>
                             <br>
@@ -41,7 +39,7 @@
                                 <label class="control-label" for="inputDefault">
                                     <h6>Title</h6>
                                 </label>
-                                <input type="text" class="form-control" id="inputDefault" ng-model="post.title">
+                                <input type="text" class="form-control" id="inputDefault" ng-model="newPost.title">
                             </div>
                             <br>
                             <br>
@@ -50,7 +48,7 @@
                             </label>
 
                             <div class="col-lg-12">
-                                <textarea class="form-control" rows="3" id="textArea" ng-model="post.description"></textarea>
+                                <textarea class="form-control" rows="3" id="textArea" ng-model="newPost.description"></textarea>
                                 <span class="help-block">Write a brief description about this post.</span>
                             </div>
                             <p class="postButton">
@@ -59,55 +57,69 @@
                         </div>
                     </form>
                 </div>
-
-
-
             </div>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-primary" ng-repeat="newPost in posts">
+            <div class="panel panel-primary" ng-repeat="thisPost in posts">
                 <div class="panel-heading">
 
-                    <h3 class="panel-title">{{newPost.title}}</h3>
+                    <h3 class="panel-title">{{thisPost.title}}</h3>
                 </div>
 
                 <div class="row panel-body">
                     <div class="col-md-6">
 
                         <!--This is where a user posts an article URL-->
-                        <div class="videoWrapper" ng-show="newPost.url">
+                        <div class="videoWrapper" ng-show="thisPost.url">
 
-                            <iframe ng-src="{{getAuthorizedUrl(newPost.url)}}"></iframe>
+                            <iframe ng-src="{{getAuthorizedUrl(thisPost.url)}}"></iframe>
                         </div>
-                        <div class="imageWrapper" ng-show="newPost.imageUrl">
+                        <div class="imageWrapper" ng-show="thisPost.imageUrl">
 
                             <!--This is where an image will post-->
-                            <img ng-src="{{newPost.imageUrl}}">
+                            <img ng-src="{{thisPost.imageUrl}}">
                         </div>
 
                         <!--This is where a video will post-->
 
-                        <div class="videoWrapper" ng-show="newPost.videoUrl">
-
-                            <iframe ng-src="{{getAuthorizedUrl(newPost.videoUrl)}}" allowfullscreen></iframe>
+                        <div class="videoWrapper" ng-show="thisPost.videoUrl">
+                            <iframe ng-src="{{getAuthorizedUrl(thisPost.videoUrl)}}" allowfullscreen></iframe>
                         </div>
 
 
                     </div>
                     <div class="col-md-3" style="text-align:left">
                         <div>
-                            <h6>Description: </h6>{{newPost.description}}</div>
+                            <h6>Description: </h6>{{thisPost.description}}
+                        </div>
                     </div>
 
                 </div>
+                
+                
 
                 <div class="panel panel-default">
                     <div class="panel-heading">Comments</div>
                     <div class="panel-body">
-                        {{newPost.comments[0].text}}
+                        <div class="col-lg-12">
+                            <label class="control-label" for="inputDefault">
+                            </label>
+                            <input ng-model="thisPost.commentStr" type="text" name="commentInput" placeholder="Add a Comment" class="form-control" id="inputDefault">
+                        </div>
+                        <br>
+                        <br>
+                        <p class="postButton">
+                            <a class="btn btn-primary" ng-click="addComment(thisPost)">Comment</a>
+                        </p>
+
+                        <div class="col-md-3" style="text-align:left"  ng-repeat="comment in thisPost.comments track by $index">
+                            <div>{{comment.text}}</div>
+                        </div>
+                        
+
                     </div>
                 </div>
 
@@ -116,3 +128,4 @@
         </div>
 
     </div>
+</div>

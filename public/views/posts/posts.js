@@ -19,10 +19,13 @@ app.factory("Post", function () {
         this.description = null;
         this.votes = null;
         this.date = null;
-        this.comments = [{
-            text: "This comment is pulling from your factory",
-            date: null
-       }];
+        this.comments = [
+            /*{
+                        text: null,
+                        date: null
+                   }*/
+            ];
+        this.commentStr = "";
     };
 
     return post;
@@ -30,7 +33,6 @@ app.factory("Post", function () {
 });
 
 app.service('dataService', function () {
-
     //posts is test data and will go away when the server is in place
     var posts = [];
 
@@ -39,49 +41,59 @@ app.service('dataService', function () {
     };
 
     this.getPosts = function () {
-
         return posts; //Will actually be $http.get
     };
 
-    this.addComment = function (commentStr, post) {
+    this.addComment = function (newCommentStr, post) {
+        console.log('this is always empty why... ' + newCommentStr);
         var comment = {
-            text: commentStr,
+            text: newCommentStr,
             date: Date.now()
         };
-        this.post.comments.push(comment);
+
+        post.comments.push(comment);
     };
 
 });
 
 app.controller('postCtrl', function ($scope, Post, dataService, $sce) {
     $scope.posts = dataService.getPosts();
-    $scope.post = new Post();
-    $scope.commentStr = "";
+    $scope.newPost = new Post();
+    $scope.newCommentStr = "asfsafsaf";
 
 
 
     $scope.createPost = function () {
         //write validation code
-        $scope.post.videoUrl = videoValidator($scope.post.videoUrl);
+        $scope.newPost.videoUrl = videoValidator($scope.newPost.videoUrl);
 
-        dataService.createPost($scope.post);
+        dataService.createPost($scope.newPost);
 
-        $scope.post = {};
-        
+        $scope.newPost = new Post();
+
         //$scope.inputFields.$setPristine(true);
         $scope.hideVideoUrl = false;
         $scope.hideImageUrl = false;
         $scope.hideUrl = false;
 
         $scope.posts = dataService.getPosts();
-
-
     };
 
 
 
     $scope.addComment = function (post) {
-        dataService.addComment($scope.commentStr, post);
+        console.log("POST!", post);
+
+
+        console.log('reading rainbow gives you wings ' + post.commentStr);
+        //        console.log('Post ');
+        //        console.log($scope.posts[postIndex]);
+
+        //        console.log("BOOM", $scope.newCommentStr);
+        dataService.addComment(post.commentStr, post);
+
+        post.commentStr = '';
+        //        console.log($scope.posts[postIndex].comments);
     };
 
     $scope.getAuthorizedUrl = function (url) {
@@ -95,21 +107,19 @@ app.controller('postCtrl', function ($scope, Post, dataService, $sce) {
     $scope.inputChanged = function (urlType) {
 
         if (urlType === 'video') {
-       
+
             //if user entered text in video field
-            if ($scope.post.videoUrl && $scope.post.videoUrl.length > 0) {
-            
+            if ($scope.newPost.videoUrl && $scope.newPost.videoUrl.length > 0) {
+
                 $scope.hideUrl = true;
                 $scope.hideImageUrl = true;
-                  
-                
             } else {
                 $scope.hideVideoUrl = false;
                 $scope.hideImageUrl = false;
                 $scope.hideUrl = false;
             }
         } else if (urlType === 'url') {
-            if ($scope.post.url && $scope.post.url.length > 0) {
+            if ($scope.newPost.url && $scope.newPost.url.length > 0) {
                 $scope.hideVideoUrl = true;
                 $scope.hideImageUrl = true;
 
@@ -119,7 +129,7 @@ app.controller('postCtrl', function ($scope, Post, dataService, $sce) {
                 $scope.hideImageUrl = false;
             }
         } else if (urlType === 'image') {
-            if ($scope.post.imageUrl && $scope.post.imageUrl.length > 0) {
+            if ($scope.newPost.imageUrl && $scope.newPost.imageUrl.length > 0) {
                 $scope.hideUrl = true;
                 $scope.hideVideoUrl = true;
 
@@ -128,42 +138,8 @@ app.controller('postCtrl', function ($scope, Post, dataService, $sce) {
                 $scope.hideImageUrl = false;
                 $scope.hideUrl = false;
             }
-
-
         }
 
-    };
-
-
-
-
-
-    $scope.clickedAddStatusButton = function () {
-        // $scope.statusPost.push($scope.newStatus);
-        var videoUrl = videoValidator($scope.newStatus.mediaUrl);
-        var newType = 'img';
-        var newUrl = $scope.newStatus.mediaUrl;
-
-        if (videoUrl !== null) {
-            console.log('here be cheeeeeze: ' + videoUrl);
-            newType = 'video';
-            newUrl = videoUrl;
-        }
-
-        $scope.newStatus = {
-            profilePic: $scope.newStatus.userPic,
-            uploadDate: new Date(),
-            title: $scope.newStatus.title,
-            mediaUrl: newUrl,
-            description: $scope.newStatus.description,
-            type: newType
-        };
-
-
-        feedService.statusPosts.push($scope.newStatus);
-
-        $scope.newStatus = {};
-        $location.path('/feed');
     };
 
 
